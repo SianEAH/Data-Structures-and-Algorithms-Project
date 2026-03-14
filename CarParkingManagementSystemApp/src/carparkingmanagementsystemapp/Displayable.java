@@ -9,5 +9,6 @@ package carparkingmanagementsystemapp;
  * @author siane
  */
 public interface Displayable {
+    //interface to handle the displaying of details for Vehicle objects
     public void displayDetails();
 }

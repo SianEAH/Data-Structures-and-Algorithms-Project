@@ -9,6 +9,7 @@ package carparkingmanagementsystemapp;
  * @author siane
  */
 public interface Parkable {
-    public void parkVehicle(Object vehicle);
+    //Handling my vehicles methods
+    public void parkVehicle(Object Vehicle);
     public void removeVehicle(String licensePlateNumber);
 }

@@ -10,15 +10,41 @@ package carparkingmanagementsystemapp;
  */
 public class Vehicle implements Displayable{
     //data members
+    String ownerName, licensePlateNumber;
     
     //constructor
     //Basic constructor
+    public Vehicle() {
+        
+    }
     
     //Other constructor
+    public Vehicle(String ownerName, String licensePlateNumber) {
+        this.ownerName = ownerName;
+        this.licensePlateNumber = licensePlateNumber;
+    }
     
     //setters
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public void setLicensePlateNumber(String licensePlateNumber) {
+        this.licensePlateNumber = licensePlateNumber;
+    }
     
     //getters
+     public String getOwnerName() {
+        return ownerName;
+    }
+
+    public String getLicensePlateNumber() {
+        return licensePlateNumber;
+    }
     
     //methods
+    @Override
+    public void displayDetails() {
+        
+    }
 }
