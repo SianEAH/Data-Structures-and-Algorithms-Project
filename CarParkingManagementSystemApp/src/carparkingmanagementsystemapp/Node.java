@@ -20,7 +20,7 @@ public class Node {
     }
     
     //other constructor
-    public Node(CarParkingSpace space, Node next) {
+    public Node(CarParkingSpace space) {
         this.space = space;
         this.next = next;
     }
