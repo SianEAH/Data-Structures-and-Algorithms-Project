@@ -8,9 +8,12 @@ package carparkingmanagementsystemapp;
  *
  * @author siane
  */
+
+//this is my parent class
+
 public class Vehicle implements Displayable{
     //data members
-    String ownerName, licensePlateNumber;
+    protected String ownerName, licensePlateNumber; //protected because ElectricVehicle & DisabledVehicle will inherit the class
     
     //constructor
     //Basic constructor
@@ -45,6 +48,6 @@ public class Vehicle implements Displayable{
     //methods
     @Override
     public void displayDetails() {
-        
+       System.out.println("Owner: " + ownerName + "\nLicense Plate: " + licensePlateNumber); 
     }
 }

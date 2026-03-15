@@ -11,23 +11,22 @@ package carparkingmanagementsystemapp;
 
 //this is a child class of Vehicle
 
-public class ElectricVehicle extends Vehicle {
-    
+public class DisabledVehicle extends Vehicle{
+
     //data members
     
     //constructor
     //basic constructor
-    public ElectricVehicle() {
+    public DisabledVehicle() {
         
     }
     
     //super constructor
-    public ElectricVehicle(String ownerName, String licensePlateNumber) {
+    public DisabledVehicle(String ownerName, String licensePlateNumber) {
         super(ownerName, licensePlateNumber);
     }
     
     //setters
-    
     
     //getters
     
