@@ -60,20 +60,40 @@ public class CarParkingSpaceSLL {
     
     //finding a free space
     public CarParkingSpace findFreeSpace() {
-    curr = head; //starting at the beginnging of the list (head)
+        curr = head; //starting at the beginnging of the list (head)
 
-    while(curr != null) {
+        while(curr != null) {
 
-        CarParkingSpace space = (CarParkingSpace) curr.getSpace(); //get curr's space, casting CarParkingSpace
+            CarParkingSpace space = (CarParkingSpace) curr.getSpace(); //get curr's space, casting CarParkingSpace
 
-        if(!space.isTaken()) {
-            return space;
+            if(!space.isTaken()) {
+                return space;
+            }
+
+            curr = curr.getNext(); //curr becomes the next space/element
         }
 
-        curr = curr.getNext(); //curr becomes the next space/element
-    }
+        return null;
+        }
 
-    return null;
+        //searching for a vehicle space by license plate number
+        public CarParkingSpace findVehicleSpace(String licensePlateNumber) {
+
+        curr = head; //curr is the head
+
+        while(curr != null) { //while curr is not null, get the next space
+
+            CarParkingSpace space = curr.getSpace();
+            //if the space is taken the the license plate number equals, return the space
+            if(space.isTaken() && space.getVehicle().getLicensePlateNumber().equals(licensePlateNumber)) {
+
+                return space;
+            }
+
+            curr = curr.getNext();
+        }
+
+        return null; //if not return null
     }
     
     //print the list
