@@ -10,9 +10,9 @@ package carparkingmanagementsystemapp;
  */
 public class CarParkingSpaceSLL {
     //data members
-    private Node head;
-    private Node curr;
-    private Node prev;
+    private SLLNode head;
+    private SLLNode curr;
+    private SLLNode prev;
     private int size; //track the size of the SLL
     
     //constructor
@@ -41,7 +41,7 @@ public class CarParkingSpaceSLL {
     //adding a space to my SLL
     public void add(CarParkingSpace space) { //take in the CarParkingSpace object variable space
 
-    Node newNode = new Node(space); //instance of Node, newNode and taking in a space
+    SLLNode newNode = new SLLNode(space); //instance of Node, newNode and taking in a space
 
     if(head == null) { //if the head is null, nothing is in the list
         head = newNode; //the head becomes the newNode
@@ -78,7 +78,7 @@ public class CarParkingSpaceSLL {
     
     //print the list
     public void printList() {
-        Node aNode = head;
+        SLLNode aNode = head;
 
         while(aNode != null) {
             CarParkingSpace space = (CarParkingSpace) aNode.getSpace();
