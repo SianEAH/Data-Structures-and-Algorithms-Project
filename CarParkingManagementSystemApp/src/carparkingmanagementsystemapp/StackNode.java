@@ -8,6 +8,9 @@ package carparkingmanagementsystemapp;
  *
  * @author siane
  */
+
+//Node class for my SLL - Stack
+
 public class StackNode {
     //private data members
     private String record;

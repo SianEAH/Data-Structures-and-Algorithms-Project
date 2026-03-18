@@ -18,6 +18,17 @@ public class CarParkingManagementSystemApp {
         //variables
         
         //create and declare objects
+        //Call my management system
+        CarParkingManagementSystem cpms = new CarParkingManagementSystem();
+        
+        //initialise some car parking spaces
+        cpms.addCarParkingSpace("A1");
+        cpms.addCarParkingSpace("A2");
+        cpms.addCarParkingSpace("A3");
+        
+        //make my main GUI visibile
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
         
         //inputs
         

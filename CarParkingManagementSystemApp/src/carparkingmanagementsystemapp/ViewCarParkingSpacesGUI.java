@@ -15,10 +15,16 @@ public class ViewCarParkingSpacesGUI extends javax.swing.JFrame {
     /**
      * Creates new form ViewCarParkingSpacesGUI
      */
-    public ViewCarParkingSpacesGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my management system
+    
+    public ViewCarParkingSpacesGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialising it
+        
+        displayTA.setText(cpms.displayParkingSpaces()); //always displays the spaces immediately when GUI is opened
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,93 +35,75 @@ public class ViewCarParkingSpacesGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         titleLBL = new javax.swing.JLabel();
-        spaceNumberLBL = new javax.swing.JLabel();
-        spaceStatusLBL = new javax.swing.JLabel();
-        licensePlateNumberLBL = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        refreshBTN = new javax.swing.JButton();
         backBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        displayTA = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         titleLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titleLBL.setText("Car Parking Spaces Overview:");
 
-        spaceNumberLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        spaceNumberLBL.setText("Space Number:");
-
-        spaceStatusLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        spaceStatusLBL.setText("Space Status:");
-
-        licensePlateNumberLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        licensePlateNumberLBL.setText("License Plate Number:");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        refreshBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        refreshBTN.setText("Refresh");
-
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backBTN.setText("Back");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
+
+        displayTA.setColumns(20);
+        displayTA.setRows(5);
+        jScrollPane2.setViewportView(displayTA);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(spaceNumberLBL)
-                        .addGap(105, 105, 105)
-                        .addComponent(spaceStatusLBL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(licensePlateNumberLBL)))
-                .addGap(79, 79, 79))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(titleLBL))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(backBTN)
-                        .addGap(116, 116, 116)
-                        .addComponent(refreshBTN)
-                        .addGap(95, 95, 95)
-                        .addComponent(exitBTN)))
+                .addGap(137, 137, 137)
+                .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(exitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(titleLBL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(titleLBL)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spaceNumberLBL)
-                    .addComponent(spaceStatusLBL)
-                    .addComponent(licensePlateNumberLBL))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshBTN)
-                    .addComponent(backBTN)
-                    .addComponent(exitBTN))
+                    .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,18 +127,14 @@ public class ViewCarParkingSpacesGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewCarParkingSpacesGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new ViewCarParkingSpacesGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBTN;
+    private javax.swing.JTextArea displayTA;
     private javax.swing.JButton exitBTN;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel licensePlateNumberLBL;
-    private javax.swing.JButton refreshBTN;
-    private javax.swing.JLabel spaceNumberLBL;
-    private javax.swing.JLabel spaceStatusLBL;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel titleLBL;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,8 +76,8 @@ public class CarParkingSpaceSLL {
         return null;
         }
 
-        //searching for a vehicle space by license plate number
-        public CarParkingSpace findVehicleSpace(String licensePlateNumber) {
+    //searching for a vehicle space by license plate number
+    public CarParkingSpace findVehicleSpace(String licensePlateNumber) {
 
         curr = head; //curr is the head
 
@@ -91,19 +91,30 @@ public class CarParkingSpaceSLL {
             }
 
             curr = curr.getNext();
-        }
-
-        return null; //if not return null
     }
+
+    return null; //if not return null
+}
     
     //print the list
-    public void printList() {
-        SLLNode aNode = head;
-
-        while(aNode != null) {
-            CarParkingSpace space = (CarParkingSpace) aNode.getSpace();
-            System.out.println(space.getCarSpaceID());
-            aNode = aNode.getNext();
+    public String getSpaces() {
+        StringBuffer sb = new StringBuffer();
+        SLLNode curr = head;
+        
+        while(curr != null) {
+            CarParkingSpace space = curr.getSpace(); //get the space
+            
+            sb.append(space.getCarSpaceID()); //apend the ID
+            
+            if(space.isTaken()) {
+                sb.append(" | Occupied | ").append(space.getVehicle().getLicensePlateNumber()); //apend whether it's taken
+            } else {
+                sb.append(" | Free | None"); //or free
+            }
+            sb.append("\n"); //new line
+            
+            curr = curr.getNext();
         }
+        return sb.toString(); //return to String
     }
 }

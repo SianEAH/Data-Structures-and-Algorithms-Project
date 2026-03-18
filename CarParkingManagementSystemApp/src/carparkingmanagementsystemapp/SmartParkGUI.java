@@ -15,8 +15,12 @@ public class SmartParkGUI extends javax.swing.JFrame {
     /**
      * Creates new form SmartParkGUI
      */
-    public SmartParkGUI() {
+    //private data members
+    private CarParkingManagementSystem cpms; //allowing the GUI to use my system
+    
+    public SmartParkGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialising in the constructor
     }
 
     /**
@@ -44,24 +48,31 @@ public class SmartParkGUI extends javax.swing.JFrame {
 
         addVehicleBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addVehicleBTN.setText("Add Vehicle");
+        addVehicleBTN.addActionListener(this::addVehicleBTNActionPerformed);
 
         removeVehicleBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         removeVehicleBTN.setText("Remove Vehicle");
+        removeVehicleBTN.addActionListener(this::removeVehicleBTNActionPerformed);
 
         viewParkingBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewParkingBTN.setText("View Parking");
+        viewParkingBTN.addActionListener(this::viewParkingBTNActionPerformed);
 
         viewQueueBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewQueueBTN.setText("View Waiting List");
+        viewQueueBTN.addActionListener(this::viewQueueBTNActionPerformed);
 
         viewDisabledPQueueBTB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewDisabledPQueueBTB.setText("View Disability Waiting List");
+        viewDisabledPQueueBTB.addActionListener(this::viewDisabledPQueueBTBActionPerformed);
 
         viewParkingHistoryStackBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewParkingHistoryStackBTN.setText("View Parking History");
+        viewParkingHistoryStackBTN.addActionListener(this::viewParkingHistoryStackBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,6 +129,54 @@ public class SmartParkGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addVehicleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleBTNActionPerformed
+        // TODO add your handling code here:
+        //Go over to the AddVehicleGUI
+        AddVehicleGUI avGUI = new AddVehicleGUI(cpms);
+        avGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_addVehicleBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
+
+    private void removeVehicleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeVehicleBTNActionPerformed
+        // TODO add your handling code here:
+        RemoveVehicleGUI rvGUI = new RemoveVehicleGUI(cpms);
+        rvGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_removeVehicleBTNActionPerformed
+
+    private void viewParkingBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewParkingBTNActionPerformed
+        // TODO add your handling code here:
+        ViewCarParkingSpacesGUI crpsGUI = new ViewCarParkingSpacesGUI(cpms);
+        crpsGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_viewParkingBTNActionPerformed
+
+    private void viewQueueBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewQueueBTNActionPerformed
+        // TODO add your handling code here:
+        WaitingListGUI wlGUI = new WaitingListGUI(cpms);
+        wlGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_viewQueueBTNActionPerformed
+
+    private void viewDisabledPQueueBTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDisabledPQueueBTBActionPerformed
+        // TODO add your handling code here:
+        DisabilityWaitingListGUI dwlGUI = new DisabilityWaitingListGUI(cpms);
+        dwlGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_viewDisabledPQueueBTBActionPerformed
+
+    private void viewParkingHistoryStackBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewParkingHistoryStackBTNActionPerformed
+        // TODO add your handling code here:
+        CarParkingRecentHistoryGUI cprhGUI = new CarParkingRecentHistoryGUI(cpms);
+        cprhGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_viewParkingHistoryStackBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,7 +199,7 @@ public class SmartParkGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new SmartParkGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new SmartParkGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

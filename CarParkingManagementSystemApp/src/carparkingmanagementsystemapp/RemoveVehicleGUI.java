@@ -4,6 +4,8 @@
  */
 package carparkingmanagementsystemapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author siane
@@ -15,8 +17,12 @@ public class RemoveVehicleGUI extends javax.swing.JFrame {
     /**
      * Creates new form RemoveVehicleGUI
      */
-    public RemoveVehicleGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my management system
+    
+    public RemoveVehicleGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialise it
     }
 
     /**
@@ -45,12 +51,15 @@ public class RemoveVehicleGUI extends javax.swing.JFrame {
 
         removeVehicleBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         removeVehicleBTN.setText("Remove Vehicle");
+        removeVehicleBTN.addActionListener(this::removeVehicleBTNActionPerformed);
 
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backBTN.setText("Back");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,6 +103,35 @@ public class RemoveVehicleGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void removeVehicleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeVehicleBTNActionPerformed
+        // TODO add your handling code here:
+        //Make sure the field is filled in
+        
+        //Variables
+        String licensePlateNumber = licensePlateNumberTF.getText();
+        
+        //Checking if the field is empty
+        if(licensePlateNumber.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter a license plate number to delete");
+            return;
+        }
+
+        cpms.removeVehicle(licensePlateNumber);
+        JOptionPane.showMessageDialog(null, "Vehicle has been removed");
+    }//GEN-LAST:event_removeVehicleBTNActionPerformed
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -116,7 +154,7 @@ public class RemoveVehicleGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RemoveVehicleGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new RemoveVehicleGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

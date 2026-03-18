@@ -13,7 +13,7 @@ package carparkingmanagementsystemapp;
 
 public class Vehicle implements Displayable{
     //data members
-    protected String ownerName, licensePlateNumber; //protected because ElectricVehicle & DisabledVehicle will inherit the class
+    protected String ownerName, licensePlateNumber; 
     
     //constructor
     //Basic constructor

@@ -61,14 +61,14 @@ public class CarParkingSpace {
     //methods
     //assign a vehicle a space
     public void assignVehicle(Vehicle vehicle) { //Vehicle object
-    this.vehicle = vehicle;
-    this.isTaken = true;
+        this.vehicle = vehicle;
+        this.isTaken = true;
     }
     
     //remove a vehicle
     public void removeVehicle() {
-    this.vehicle = null;
-    this.isTaken = false;
+        this.vehicle = null;
+        this.isTaken = false;
     }
     
     //display space for testing purposes

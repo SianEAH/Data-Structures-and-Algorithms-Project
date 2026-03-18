@@ -15,8 +15,14 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
     /**
      * Creates new form DisabilityWaitingListGUI
      */
-    public DisabilityWaitingListGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my management system
+    
+    public DisabilityWaitingListGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialise it
+        
+        displayTA.setText(cpms.displayDisabledQueue()); //set the display area to the Disability Queue
     }
 
     /**
@@ -32,7 +38,6 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         displayTA = new javax.swing.JTextArea();
         backBTN = new javax.swing.JButton();
-        refreshBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,12 +51,11 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
 
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backBTN.setText("Back");
-
-        refreshBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        refreshBTN.setText("Refresh");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,11 +70,9 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(167, 167, 167)
                         .addComponent(backBTN)
-                        .addGap(125, 125, 125)
-                        .addComponent(refreshBTN)
-                        .addGap(94, 94, 94)
+                        .addGap(46, 46, 46)
                         .addComponent(exitBTN)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -84,13 +86,24 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBTN)
-                    .addComponent(refreshBTN)
                     .addComponent(exitBTN))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,7 +127,7 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DisabilityWaitingListGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new DisabilityWaitingListGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -122,7 +135,6 @@ public class DisabilityWaitingListGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea displayTA;
     private javax.swing.JButton exitBTN;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton refreshBTN;
     private javax.swing.JLabel titleLBL;
     // End of variables declaration//GEN-END:variables
 }

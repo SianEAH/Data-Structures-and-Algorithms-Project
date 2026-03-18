@@ -15,8 +15,14 @@ public class WaitingListGUI extends javax.swing.JFrame {
     /**
      * Creates new form WaitingListGUI
      */
-    public WaitingListGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my management system
+    
+    public WaitingListGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialising it
+        
+        displayTA.setText(cpms.displayWaitingQueue()); //show the vehicle queue when GUI is loaded
     }
 
     /**
@@ -31,7 +37,6 @@ public class WaitingListGUI extends javax.swing.JFrame {
         titleLBL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         displayTA = new javax.swing.JTextArea();
-        refreshBTN = new javax.swing.JButton();
         backBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
 
@@ -44,14 +49,13 @@ public class WaitingListGUI extends javax.swing.JFrame {
         displayTA.setRows(5);
         jScrollPane1.setViewportView(displayTA);
 
-        refreshBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        refreshBTN.setText("Refresh");
-
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backBTN.setText("Back");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,13 +71,11 @@ public class WaitingListGUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backBTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(refreshBTN)
-                .addGap(84, 84, 84)
+                .addGap(44, 44, 44)
                 .addComponent(exitBTN)
-                .addGap(95, 95, 95))
+                .addGap(222, 222, 222))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +86,6 @@ public class WaitingListGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshBTN)
                     .addComponent(backBTN)
                     .addComponent(exitBTN))
                 .addGap(25, 25, 25))
@@ -92,6 +93,18 @@ public class WaitingListGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,7 +128,7 @@ public class WaitingListGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new WaitingListGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new WaitingListGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -123,7 +136,6 @@ public class WaitingListGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea displayTA;
     private javax.swing.JButton exitBTN;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton refreshBTN;
     private javax.swing.JLabel titleLBL;
     // End of variables declaration//GEN-END:variables
 }

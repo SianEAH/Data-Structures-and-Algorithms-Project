@@ -50,8 +50,7 @@ public class DisabledVehiclePriorityQueue {
         if(head == null || priorityKey > head.getElement().getPriorityKey()) { //if the head is empty or the priority key is greater than the head, get element + priority key
             newNode.setNext(head); //set it to the head
             head = newNode; //head is the new node
-        }
-        else {
+        }else {
 
             PQNode curr = head; //current node is the head
             //when the next element isn't null and it's greater than the priority key

@@ -30,21 +30,16 @@ public class CarParkingManagementSystem implements Parkable {
       cphs = new CarParkingHistoryStack();  
     }
     
-    //initialise some car parking spaces
+    //initialise some car parking spaces (for main)
     public void addCarParkingSpace(String id) {
       //Make sure the parameter requirements are met
-      cpssll.add(new CarParkingSpace("A1", false, null));
-      cpssll.add(new CarParkingSpace("A2", false, null));
-      cpssll.add(new CarParkingSpace("A3", false, null));
-      cpssll.add(new CarParkingSpace("A4", false, null));
+      cpssll.add(new CarParkingSpace(id, false, null));
     }
     
     //methods
     //park vehicle method
     @Override
-    public void parkVehicle(Object vehicleObj) {
-
-        Vehicle vehicle = (Vehicle) vehicleObj; //cast back to vehicle
+    public void parkVehicle(Vehicle vehicle) {
 
         CarParkingSpace freeSpace = cpssll.findFreeSpace();
 
@@ -52,10 +47,10 @@ public class CarParkingManagementSystem implements Parkable {
 
             freeSpace.assignVehicle(vehicle);
 
-            cphs.push("Parked - " + vehicle.getLicensePlateNumber()); //record the event
+            cphs.push("Parked: " + vehicle.getLicensePlateNumber()); //record the event
 
         } else {
-
+            //https://www.w3schools.com/java/ref_keyword_instanceof.asp
             if(vehicle instanceof DisabledVehicle) {
 
                 dvpq.enqueue(1, vehicle); //go into the priority queue
@@ -77,9 +72,9 @@ public class CarParkingManagementSystem implements Parkable {
 
             space.removeVehicle(); //if it's there remove it
 
-            cphs.push("Left - " + licensePlateNumber); //record the event
+            cphs.push("Left: " + licensePlateNumber); //record the event
 
-            System.out.println("Vehicle removed from space " + space.getCarSpaceID());
+            System.out.println("Vehicle removed from space: " + space.getCarSpaceID());
 
             assignNextVehicle(); //checks for anyone now waiting for this space
 
@@ -99,7 +94,7 @@ public class CarParkingManagementSystem implements Parkable {
 
         } else if(!vq.isEmpty()) {
 
-            nextVehicle = vq.dequeue();
+            nextVehicle = vq.dequeue(); //otherwise we take from the queue
         }
 
         if(nextVehicle != null) {
@@ -116,17 +111,30 @@ public class CarParkingManagementSystem implements Parkable {
     }
     
     //display parking spaces
-    public void displayParkingSpaces() {
-        cpssll.printList();
+    public String displayParkingSpaces() {
+        return cpssll.getSpaces();
     }
     
     //display the waiting queue
-    public void displayWaitingQueue() {
-        System.out.println(vq.toString());
+    public String displayWaitingQueue() {
+        return vq.toString();
     }
     
-    //displa the recent history
-    public void displayHistory() {
-        cphs.displayStack();
+    //display the disability waiting queue
+    public String displayDisabledQueue() {
+        if(dvpq.isEmpty()) {
+            return "No disabled vehicles waiting in the queue";
+        }
+        return dvpq.printQ();
+    }
+    
+    //display the recent history
+    public String displayHistory() {
+        //Checking if it's empty
+        if(cphs.isEmpty()) {
+            return "No parking history available";
+        }
+        
+        return cphs.displayStack();
     }
 }

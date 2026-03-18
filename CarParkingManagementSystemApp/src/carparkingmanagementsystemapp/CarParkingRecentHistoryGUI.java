@@ -15,8 +15,14 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
     /**
      * Creates new form CarParkingRecentHistory
      */
-    public CarParkingRecentHistoryGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my management system
+    
+    public CarParkingRecentHistoryGUI(CarParkingManagementSystem cpms) {
         initComponents();
+        this.cpms = cpms; //initialise it
+        
+        displayTA.setText(cpms.displayHistory()); //set the display area to the parking history
     }
 
     /**
@@ -32,7 +38,6 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         displayTA = new javax.swing.JTextArea();
         backBTN = new javax.swing.JButton();
-        refreshBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,12 +51,11 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
 
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backBTN.setText("Back");
-
-        refreshBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        refreshBTN.setText("Refresh");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,13 +71,11 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
                         .addGap(183, 183, 183)
                         .addComponent(carParkingHistoryLBL))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(199, 199, 199)
                         .addComponent(backBTN)
-                        .addGap(127, 127, 127)
-                        .addComponent(refreshBTN)
-                        .addGap(102, 102, 102)
+                        .addGap(42, 42, 42)
                         .addComponent(exitBTN)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,13 +87,24 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBTN)
-                    .addComponent(refreshBTN)
                     .addComponent(exitBTN))
                 .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,7 +128,7 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CarParkingRecentHistoryGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new CarParkingRecentHistoryGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -124,6 +137,5 @@ public class CarParkingRecentHistoryGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea displayTA;
     private javax.swing.JButton exitBTN;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton refreshBTN;
     // End of variables declaration//GEN-END:variables
 }

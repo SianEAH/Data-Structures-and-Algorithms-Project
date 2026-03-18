@@ -71,13 +71,15 @@ public class CarParkingHistoryStack {
     }
     
     //display stack
-    public void displayStack() {
-
+    public String displayStack() {
+        StringBuffer sb = new StringBuffer();
+        
         StackNode curr = head;
 
         while(curr != null) {
-            System.out.println(curr.getRecord());
+            sb.append(curr.getRecord()).append("\n");
             curr = curr.getNext();
         }
+        return sb.toString(); //return to String
     }
 }

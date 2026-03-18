@@ -4,6 +4,8 @@
  */
 package carparkingmanagementsystemapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author siane
@@ -15,8 +17,12 @@ public class AddVehicleGUI extends javax.swing.JFrame {
     /**
      * Creates new form AddVehicleGUI
      */
-    public AddVehicleGUI() {
+    //variables
+    private CarParkingManagementSystem cpms; //my parking management system
+    
+    public AddVehicleGUI(CarParkingManagementSystem cpms) { //want to keep the same one, not a blank empty one
         initComponents();
+        this.cpms = cpms; //initialise it
     }
 
     /**
@@ -34,7 +40,7 @@ public class AddVehicleGUI extends javax.swing.JFrame {
         licensePlateNumberLBL = new javax.swing.JLabel();
         licensePlateNumberTF = new javax.swing.JTextField();
         vehicleTypeLBL = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        vehicleTypeCBOX = new javax.swing.JComboBox<>();
         parkVehicleBTN = new javax.swing.JButton();
         backBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
@@ -53,16 +59,19 @@ public class AddVehicleGUI extends javax.swing.JFrame {
         vehicleTypeLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         vehicleTypeLBL.setText("Vehicle Type:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Car", "Electric Car", "Disabled Vehicle" }));
+        vehicleTypeCBOX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Car", "Electric Car", "Disabled Vehicle" }));
 
         parkVehicleBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         parkVehicleBTN.setText("Park Vehicle");
+        parkVehicleBTN.addActionListener(this::parkVehicleBTNActionPerformed);
 
         backBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         backBTN.setText("Back");
+        backBTN.addActionListener(this::backBTNActionPerformed);
 
         exitBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(this::exitBTNActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +88,7 @@ public class AddVehicleGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(vehicleTypeLBL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(vehicleTypeCBOX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(licensePlateNumberLBL)
@@ -115,7 +124,7 @@ public class AddVehicleGUI extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vehicleTypeLBL)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vehicleTypeCBOX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parkVehicleBTN)
@@ -126,6 +135,48 @@ public class AddVehicleGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void parkVehicleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parkVehicleBTNActionPerformed
+        // TODO add your handling code here:
+        //All the sections must be filled out in order to park a vehicle
+        
+        //variables
+        String ownerName = ownerNameTF.getText();
+        String licensePlateNumber = licensePlateNumberTF.getText();
+        String vehicleType = vehicleTypeCBOX.getSelectedItem().toString(); //https://stackoverflow.com/questions/53977538/get-selected-item-on-jcombobox-java
+                                                                           //turn to String
+        //new Vehicle object
+        Vehicle vehicle;
+        
+        //Checking if all the fields have been entered
+        if(ownerName.isEmpty() || licensePlateNumber.isEmpty() || vehicleType.equals("Select")) {
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields providied to park your car");
+        }
+        
+        //Checking the type entered and what objects to create
+        if(vehicleType.equals("Car")) {
+        vehicle = new Vehicle(ownerName, licensePlateNumber);
+        }else if(vehicleType.equals("Electric Car")) {
+            vehicle = new ElectricVehicle(ownerName, licensePlateNumber);
+        }else {
+            vehicle = new DisabledVehicle(ownerName, licensePlateNumber);
+        }
+
+        cpms.parkVehicle(vehicle);
+        JOptionPane.showMessageDialog(null, "Vehicle Added");
+    }//GEN-LAST:event_parkVehicleBTNActionPerformed
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        SmartParkGUI spGUI = new SmartParkGUI(cpms);
+        spGUI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,19 +200,19 @@ public class AddVehicleGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AddVehicleGUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new AddVehicleGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBTN;
     private javax.swing.JButton exitBTN;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel licensePlateNumberLBL;
     private javax.swing.JTextField licensePlateNumberTF;
     private javax.swing.JLabel ownerNameLBL;
     private javax.swing.JTextField ownerNameTF;
     private javax.swing.JButton parkVehicleBTN;
     private javax.swing.JLabel titleLBL;
+    private javax.swing.JComboBox<String> vehicleTypeCBOX;
     private javax.swing.JLabel vehicleTypeLBL;
     // End of variables declaration//GEN-END:variables
 }

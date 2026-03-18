@@ -96,6 +96,6 @@ public class VehicleQueue {
             tempNode = tempNode.getNext(); //get the next vehicle
         }
 
-        return sb.toString().trim();
+        return sb.toString();
     }
 }
